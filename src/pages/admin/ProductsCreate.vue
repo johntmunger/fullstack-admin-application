@@ -5,8 +5,8 @@
             <input v-model="title" class="form-control" name="title" />
         </div>
         <div class="form-group">
-            <label>Body</label>
-            <input v-model="body" class="form-control" name="body" />
+            <label>Image</label>
+            <input v-model="image" class="form-control" name="image" />
         </div>
         <button class="btn btn-outline-secondary mt-3">Save</button>
   </form>
@@ -21,17 +21,17 @@ export default {
     setup() {
         const products = ref([]);
         const title = ref('');
-        const body = ref('');
+        const image = ref('');
         const router = useRouter();
 
         const submitPost = async () => {
 
-            await fetch(`http://localhost:5001/posts`, {
+            await fetch(`http://localhost:5001/products`, {
                 method: 'POST',
                 headers: { 'Content-type': 'application/json; charset=UTF-8' },
                 body: JSON.stringify({
                     title: title.value,
-                    body: body.value,
+                    image: image.value,
                 })
             });
 
@@ -41,7 +41,7 @@ export default {
         return {
             products,
             title,
-            body,
+            image,
             submitPost,
         }
     }

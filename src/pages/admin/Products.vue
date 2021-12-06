@@ -9,14 +9,14 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
+                    <th scope="col">Image</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Body</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="product in products" :key="product.id">
+                    <td><img :src="product.image" height="50" /></td>
                     <td>{{ product.title }}</td>
-                    <td>{{ product.body }}</td>
                     <td>
                         <div class="btn-group mr-2">
                             <router-link :to="`/admin/products/${product.id}/edit`" class="btn btn-sm btn-outline-secondary">Edit</router-link>
@@ -40,14 +40,14 @@ export default {
         const products = ref([]);
 
         onMounted(async () => {
-            const response = await fetch('http://localhost:5001/posts');
+            const response = await fetch('http://localhost:5001/products');
 
             products.value = await response.json();
         });
 
         const del = async(id: number) => {
             if (confirm('Are you sure you want to delete this product?')) {
-                await fetch(`http://localhost:5001/posts/${id}`, {
+                await fetch(`http://localhost:5001/products/${id}`, {
                     method: 'DELETE'
                 });
 
