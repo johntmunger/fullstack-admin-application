@@ -16,9 +16,9 @@
             <tbody>
                 <tr v-for="product in products" :key="product.id">
                     <td><img :src="product.image" height="50" /></td>
-                    <td>{{ product.title }}</td>
+                    <td class="pt-3">{{ product.title }}</td>
                     <td>
-                        <div class="btn-group mr-2">
+                        <div class="btn-group mr-2 pt-2">
                             <router-link :to="`/admin/products/${product.id}/edit`" class="btn btn-sm btn-outline-secondary">Edit</router-link>
                             <a href="#" class="btn btn-sm btn-outline-secondary" @click="del(product.id)">Delete</a>
                         </div>

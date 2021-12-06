@@ -4,7 +4,7 @@
             <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">
-                Products
+                Navigation here
                 </a>
             </li>
             </ul>
