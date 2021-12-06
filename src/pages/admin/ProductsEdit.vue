@@ -25,7 +25,7 @@ export default {
         const route = useRoute();
 
         onMounted(async () => {
-            const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${route.params.id}`)
+            const response = await fetch(`http://localhost:5001/posts/${route.params.id}`)
 
             const product = await response.json();
 
@@ -34,7 +34,7 @@ export default {
         });
 
         const submit = async () => {
-            await fetch(`https://jsonplaceholder.typicode.com/posts/${route.params.id}`, {
+            await fetch(`http://localhost:5001/posts/${route.params.id}`, {
                 method: 'PUT',
                 headers: { 'Content-type': 'application/json; charset=UTF-8' },
                 body: JSON.stringify({

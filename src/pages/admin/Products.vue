@@ -9,14 +9,12 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th scope="col">#</th> 
                     <th scope="col">Title</th>
                     <th scope="col">Body</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="product in products" :key="product.id">
-                    <td>{{ product.id }}</td>
                     <td>{{ product.title }}</td>
                     <td>{{ product.body }}</td>
                     <td>
@@ -42,14 +40,14 @@ export default {
         const products = ref([]);
 
         onMounted(async () => {
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+            const response = await fetch('http://localhost:5001/posts');
 
             products.value = await response.json();
         });
 
         const del = async(id: number) => {
             if (confirm('Are you sure you want to delete this product?')) {
-                await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+                await fetch(`http://localhost:5001/posts/${id}`, {
                     method: 'DELETE'
                 });
 

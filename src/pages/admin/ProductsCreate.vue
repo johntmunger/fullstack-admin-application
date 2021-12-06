@@ -26,7 +26,7 @@ export default {
 
         const submitPost = async () => {
 
-            await fetch(`https://jsonplaceholder.typicode.com/posts`, {
+            await fetch(`http://localhost:5001/posts`, {
                 method: 'POST',
                 headers: { 'Content-type': 'application/json; charset=UTF-8' },
                 body: JSON.stringify({
