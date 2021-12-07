@@ -34,7 +34,6 @@
 import { ref, onMounted } from "vue";
 import { Product } from "../../interfaces/product";
 import { fakeStoreService } from "../../services/FakeService";
-import axios from "axios";
 
 export default {
     name: "Products",

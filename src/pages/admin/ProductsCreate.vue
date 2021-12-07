@@ -12,38 +12,25 @@
   </form>
 </template>
 
-<script>
+<script lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import FakeService from "../../services/FakeService";
-// import axios from "axios";
+import { Product } from "../../interfaces/product";
+import { fakeStoreService } from "../../services/FakeService";
 
 export default {
     name: "ProductsCreate",
     setup() {
-        const products = ref([]);
-        const title = ref('');
-        const image = ref('');
+        const products = ref<Product[]>([]);
+        const title = ref<Product>();
+        const image = ref<Product>();
         const router = useRouter();
 
-        // const submit = async () => {
+        const submitPost = async (): Promise<void> => {
+            await fakeStoreService.createProduct(title.value, image.value);
+            products.value = await fakeStoreService.getProducts();
 
-        //     await fetch(`http://localhost:5001/products`, {
-        //         method: 'POST',
-        //         headers: { 'Content-type': 'application/json; charset=UTF-8' },
-        //         body: JSON.stringify({
-        //             title: title.value,
-        //             image: image.value,
-        //         })
-        //     });
-
-        //     await router.push('/admin/products');
-        // }
-
-        const submitPost = async () => {
-            FakeService.postEvents({ title: title.value, image: image.value })
-                .then(response => console.log(response))
-                .catch(err => console.log(err))
+            await router.push('/admin/products');
         }
 
         return {
@@ -55,7 +42,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>
