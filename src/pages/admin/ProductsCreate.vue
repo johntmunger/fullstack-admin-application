@@ -22,13 +22,16 @@ export default {
     name: "ProductsCreate",
     setup() {
         const products = ref<Product[]>([]);
-        const title = ref<Product>();
-        const image = ref<Product>();
+        const title = ref<'' | undefined>();
+        const image = ref<'' | undefined>();
         const router = useRouter();
 
         const submitPost = async (): Promise<void> => {
-            await fakeStoreService.createProduct(title.value, image.value);
-            products.value = await fakeStoreService.getProducts();
+
+            if (title.value && image.value) {
+                await fakeStoreService.createProduct(title.value, image.value);
+                products.value = await fakeStoreService.getProducts();
+            }
 
             await router.push('/admin/products');
         }
