@@ -33,30 +33,30 @@
 <script lang="ts">
 import { ref, onMounted } from "vue";
 import { Product } from "../../interfaces/product";
+import { fakeStoreService } from "../../services/FakeService";
+import axios from "axios";
 
 export default {
     name: "Products",
     setup() {
-        const products = ref([]);
+        const products = ref<Product[]>([]);
 
-        onMounted(async () => {
-            const response = await fetch('http://localhost:5001/products');
-
-            products.value = await response.json();
+        onMounted(() => {
+            fetchProducts();
         });
 
-        const del = async(id: number) => {
-            if (confirm('Are you sure you want to delete this product?')) {
-                await fetch(`http://localhost:5001/products/${id}`, {
-                    method: 'DELETE'
-                });
+        const fetchProducts = async (): Promise<void> => {
+            products.value = await fakeStoreService.getProducts();
+        };
 
-                products.value = products.value.filter((p: Product) => p.id !== id);
-            }
+        const del = async(id: number): Promise<void> => {
+            const val = await fakeStoreService.deleteProduct(id);
+            fetchProducts();
         }
 
         return {
             products,
+            fetchProducts,
             del
         }
     }

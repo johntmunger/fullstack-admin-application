@@ -15,6 +15,8 @@
 <script>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import FakeService from "../../services/FakeService";
+// import axios from "axios";
 
 export default {
     name: "ProductsCreate",
@@ -24,18 +26,24 @@ export default {
         const image = ref('');
         const router = useRouter();
 
+        // const submit = async () => {
+
+        //     await fetch(`http://localhost:5001/products`, {
+        //         method: 'POST',
+        //         headers: { 'Content-type': 'application/json; charset=UTF-8' },
+        //         body: JSON.stringify({
+        //             title: title.value,
+        //             image: image.value,
+        //         })
+        //     });
+
+        //     await router.push('/admin/products');
+        // }
+
         const submitPost = async () => {
-
-            await fetch(`http://localhost:5001/products`, {
-                method: 'POST',
-                headers: { 'Content-type': 'application/json; charset=UTF-8' },
-                body: JSON.stringify({
-                    title: title.value,
-                    image: image.value,
-                })
-            });
-
-            await router.push('/admin/products');
+            FakeService.postEvents({ title: title.value, image: image.value })
+                .then(response => console.log(response))
+                .catch(err => console.log(err))
         }
 
         return {
