@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submit">
+  <form @submit.prevent="submitPost">
         <div class="form-group">
             <label>Title</label>
             <input v-model="title" class="form-control" name="title" />
@@ -43,11 +43,19 @@ export default {
             .then(response => (console.log(response.data), router.push('/admin/products')))
             .catch(err => console.log(err))
         }
+
+        const submitPost = async (): Promise<void> => {
+            const int = Number(route.params.id);
+            await fakeStoreService.updateProduct(int, title.value, image.value);
+
+            await router.push('/admin/products');
+        }
     
         return {
             title,
             image,
             submit,
+            submitPost
         }
     }
 }

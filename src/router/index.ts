@@ -7,8 +7,7 @@ import Main from '../pages/Main.vue';
 
 const routes: Array<RouteRecordRaw> = [
     {
-        path: '/',
-        component: Main
+        path: '/', redirect: '/admin/products'
     },
     {
         path: '/admin',

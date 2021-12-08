@@ -10,6 +10,7 @@ interface IFakeStoreService {
     getProducts(): Promise<Product[]>;
     createProduct(title: string, image: string): Promise<Product>;
     deleteProduct(id: number): Promise<Product>;
+    updateProduct(id: number, title: string, image: string): Promise<Product>;
 }
 
 class FakeStoreService implements IFakeStoreService {
@@ -26,26 +27,23 @@ class FakeStoreService implements IFakeStoreService {
 
     async getProduct(id: Product['id']): Promise<Product> {
         const response = await this.axios.get(`${this.config.productEndpoint}/${id}`);
-        return response.data;
 
-        throw new Error("Method not implemented.");
+        return response.data;
     }
 
     async getProducts(): Promise<Product[]> {
         const response = await this.axios.get(this.config.productEndpoint);
         
         return response.data;
-        throw new Error("Method not implemented.");
     }
 
     async createProduct(title: Product['title'], image: Product['image']): Promise<Product> {
         const response = await this.axios.post(this.config.productEndpoint, {
             title,
             image
-        })
-        console.log(response);
+        });
+        
         return response.data;
-        throw new Error("Method not implemented.");
     }
 
     async deleteProduct(id: Product['id']): Promise<Product> {
@@ -55,6 +53,15 @@ class FakeStoreService implements IFakeStoreService {
             return response.data;
         }
         throw new Error("Method not implemented.");
+    }
+
+    async updateProduct(id: Product['id'], title: Product['title'], image: Product['image']): Promise<Product> {
+        const response = await this.axios.put(`${this.config.productEndpoint}/${id}`, {
+            title,
+            image
+        });
+
+        return response.data;
     }
 
 }

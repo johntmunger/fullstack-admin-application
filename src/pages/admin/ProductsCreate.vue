@@ -27,12 +27,10 @@ export default {
         const router = useRouter();
 
         const submitPost = async (): Promise<void> => {
-
             if (title.value && image.value) {
                 await fakeStoreService.createProduct(title.value, image.value);
                 products.value = await fakeStoreService.getProducts();
             }
-
             await router.push('/admin/products');
         }
 
