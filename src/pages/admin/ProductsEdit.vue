@@ -15,9 +15,9 @@
 <script lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { Product } from "../../interfaces/product";
+// import { Product } from "../../interfaces/product";
 import { fakeStoreService } from "../../services/FakeService";
-// import axios from "axios";
+import axios from "axios";
 
 export default {
     name: "ProductsEdit",
@@ -36,19 +36,14 @@ export default {
         });
 
         const submit = async () => {
-            await fetch(`http://localhost:5001/products/${route.params.id}`, {
-                method: 'PUT',
-                headers: { 'Content-type': 'application/json; charset=UTF-8' },
-                body: JSON.stringify({
-                    title: title.value,
-                    image: image.value,
-                })
-            });
-
-            await router.push('/admin/products');
+            await axios.put(`http://localhost:5001/products/${route.params.id}`, {
+                title: title.value,
+                image: image.value,
+            })
+            .then(response => (console.log(response.data), router.push('/admin/products')))
+            .catch(err => console.log(err))
         }
-        
-
+    
         return {
             title,
             image,
