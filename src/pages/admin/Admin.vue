@@ -3,8 +3,8 @@
     <Nav />
     <div class="container-fluid">
         <div class="row">
-            <Menu />
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <!-- <Menu /> -->
+            <main class="ms-sm-auto col-lg-12 px-md-4">
                 <router-view />
             </main>
         </div>
@@ -19,7 +19,7 @@ export default {
     name: "Admin",
     components: { 
         Nav,
-        Menu
+        // Menu
     }
 }
 </script>
