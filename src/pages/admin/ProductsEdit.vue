@@ -22,14 +22,17 @@ import { fakeStoreService } from "../../services/FakeService";
 export default {
     name: "ProductsEdit",
     setup() {
-        const title = ref('');
-        const image = ref('');
+        const title = ref();
+        const image = ref();
         const router = useRouter();
         const route = useRoute();
 
         onMounted(async () => {
-            const int: number = Number(route.params.id);
-            await fakeStoreService.getProduct(int);
+            const int = Number(route.params.id);
+            const resp = await fakeStoreService.getProduct(int);
+
+            title.value = resp.title,
+            image.value = resp.image
         });
 
         const submit = async () => {
