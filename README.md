@@ -1,23 +1,14 @@
-# vue3-typescript-app
+# Product CRUD Type Application
+The single page application uses JSON Server for an API on the backend. And uses Vuejs 3 with the Composition API along with TypeScript and Bootstrap CSS on the frontend. Data is moved through components with an interface and Store service.
 
 ## Project setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Builds API server and development frontend
 ```
 npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
 ```
 
 ### Customize configuration
