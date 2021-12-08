@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "api": "json-server --watch db.json --port 5001"
+    "api": "json-server --watch db.json --port 5001",
+    "serve": "concurrently --kill-others \"npm run dev\" \"npm run api\""
   },
   "dependencies": {
     "axios": "^0.24.0",
@@ -25,6 +26,7 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
+    "concurrently": "^6.4.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
     "typescript": "~4.1.5"
