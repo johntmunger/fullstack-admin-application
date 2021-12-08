@@ -6,6 +6,7 @@ import {
 } from "../constants/api.constants";
 
 interface IFakeStoreService {
+    getProduct(id: number): Promise<Product>;
     getProducts(): Promise<Product[]>;
     createProduct(title: string, image: string): Promise<Product>;
     deleteProduct(id: number): Promise<Product>;
@@ -21,6 +22,13 @@ class FakeStoreService implements IFakeStoreService {
             baseURL: config.baseUrl,
             headers: config.headers
         });
+    }
+
+    async getProduct(id: Product['id']): Promise<Product> {
+        const response = await this.axios.get(`${this.config.productEndpoint}/${id}`);
+        return response.data;
+
+        throw new Error("Method not implemented.");
     }
 
     async getProducts(): Promise<Product[]> {

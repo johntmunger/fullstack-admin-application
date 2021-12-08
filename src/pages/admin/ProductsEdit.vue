@@ -12,9 +12,12 @@
   </form>
 </template>
 
-<script>
+<script lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { Product } from "../../interfaces/product";
+import { fakeStoreService } from "../../services/FakeService";
+// import axios from "axios";
 
 export default {
     name: "ProductsEdit",
@@ -25,12 +28,8 @@ export default {
         const route = useRoute();
 
         onMounted(async () => {
-            const response = await fetch(`http://localhost:5001/products/${route.params.id}`)
-
-            const product = await response.json();
-
-            title.value = product.title;
-            image.value = product.image;
+            const int: number = Number(route.params.id);
+            await fakeStoreService.getProduct(int);
         });
 
         const submit = async () => {
